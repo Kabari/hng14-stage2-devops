@@ -252,6 +252,11 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
+          if [ -z "$DEPLOY_HOST" ] || [ -z "$SSH_PRIVATE_KEY" ]; then
+            echo "Deploy secrets not configured, skipping deployment."
+            exit 0
+          fi
+
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
