@@ -11,12 +11,15 @@ REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", None)
 
 r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
 
+
 @app.get("/healthz")
 def health():
-    try: r.ping()
+    try: 
+        r.ping()
     except Exception:
         raise HTTPException(status_code=503, detail="Redis unavailable")
     return {"status": "ok"}
+
 
 @app.post("/jobs")
 def create_job():
@@ -24,6 +27,7 @@ def create_job():
     r.lpush("jobs", job_id)
     r.hset(f"job:{job_id}", "status", "queued")
     return {"job_id": job_id}
+
 
 @app.get("/jobs/{job_id}")
 def get_job(job_id: str):
