@@ -14,7 +14,7 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
 
 @app.get("/healthz")
 def health():
-    try: 
+    try:
         r.ping()
     except Exception:
         raise HTTPException(status_code=503, detail="Redis unavailable")
