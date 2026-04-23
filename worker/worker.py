@@ -25,10 +25,10 @@ signal.signal(signal.SIGTERM, shutdown)
 signal.signal(signal.SIGINT, shutdown)
 
 def process_job(job_id):
-    print(f"Processing job {job_id}")
+    logger.info(f"Processing job {job_id}")
     time.sleep(2)  # simulate work
     r.hset(f"job:{job_id}", "status", "completed")
-    print(f"Done: {job_id}")
+    logger.info(f"Done: {job_id}")
 
 while running:
     try:
