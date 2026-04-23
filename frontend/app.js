@@ -8,6 +8,10 @@ const API_URL = process.env.API_URL || 'http://api:8000';
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'views')));
 
+app.get('/healthz', (_req, res) => {
+  res.json({ status: "ok" });
+});
+
 app.post('/submit', async (req, res) => {
   try {
     const response = await axios.post(`${API_URL}/jobs`);
