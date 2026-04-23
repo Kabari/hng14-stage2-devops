@@ -14,7 +14,7 @@ r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)
 @app.post("/jobs")
 def create_job():
     job_id = str(uuid.uuid4())
-    r.lpush("job", job_id)
+    r.lpush("jobs", job_id)
     r.hset(f"job:{job_id}", "status", "queued")
     return {"job_id": job_id}
 
