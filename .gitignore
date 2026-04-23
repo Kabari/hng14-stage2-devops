@@ -1,0 +1,27 @@
+.env
+*.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Docker
+*.tar
+
+# Editor
+.vscode/
+.idea/
+*.swp
