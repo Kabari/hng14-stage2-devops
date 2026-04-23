@@ -31,7 +31,11 @@ def process_job(job_id):
     print(f"Done: {job_id}")
 
 while running:
-    job = r.brpop("job", timeout=5)
-    if job:
-        _, job_id = job
-        process_job(job_id.decode())
+    try:
+        job = r.brpop("jobs", timeout=5)
+        if job:
+            _, job_id = job
+            process_job(job_id.decode())
+    except redis.exceptions.ConnectionError as exc:
+        logger.error(f"Redis connection error: {exc}. Retrying in 5s...")
+        time.sleep(5)  # wait before retrying
