@@ -30,6 +30,8 @@ app.get('/status/:id', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Frontend running on port 3000');
+const PORT = parseInt(process.env.PORT || '3000', 10);
+
+app.listen(PORT, () => {
+  console.log(`Frontend running on port ${PORT}`);
 });
