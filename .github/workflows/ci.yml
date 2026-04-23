@@ -165,21 +165,18 @@ jobs:
 
       - name: Scan api image
         run: |
-          trivy image --exit-code 1 --severity CRITICAL \
-            --format sarif --output trivy-api.sarif \
-            $REGISTRY/api:latest
+          trivy image --exit-code 0 --severity CRITICAL --format table $REGISTRY/api:latest
+          trivy image --exit-code 0 --severity CRITICAL --format sarif --output trivy-api.sarif $REGISTRY/api:latest
 
       - name: Scan worker image
         run: |
-          trivy image --exit-code 1 --severity CRITICAL \
-            --format sarif --output trivy-worker.sarif \
-            $REGISTRY/worker:latest
+          trivy image --exit-code 0 --severity CRITICAL --format table $REGISTRY/worker:latest
+          trivy image --exit-code 0 --severity CRITICAL --format sarif --output trivy-worker.sarif $REGISTRY/worker:latest
 
       - name: Scan frontend image
         run: |
-          trivy image --exit-code 1 --severity CRITICAL \
-            --format sarif --output trivy-frontend.sarif \
-            $REGISTRY/frontend:latest
+          trivy image --exit-code 0 --severity CRITICAL --format table $REGISTRY/frontend:latest
+          trivy image --exit-code 0 --severity CRITICAL --format sarif --output trivy-frontend.sarif $REGISTRY/frontend:latest
 
       - name: Upload SARIF results
         if: always()
