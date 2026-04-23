@@ -3,7 +3,7 @@ FROM node:20-slim AS builder
 
 WORKDIR /build
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # ── runtime ──────────────────────────────────────────────────────────────────
 FROM node:20-slim
