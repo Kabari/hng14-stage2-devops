@@ -8,6 +8,7 @@ on:
 
 env:
   REGISTRY: localhost:5000
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"  # Ensure Node 24 for JS linting actions
 
 jobs:
   # ────────────────────────────────────────────────────
